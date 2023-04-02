@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,6 +19,12 @@ public class CarController {
     @GetMapping
     public ResponseEntity<Iterable<Car>> Get(){
         return new ResponseEntity<>(carRepo.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Car> Add(Car car){
+        carRepo.save(car);
+        return new ResponseEntity<>(car, HttpStatus.CREATED);
     }
 
 }
